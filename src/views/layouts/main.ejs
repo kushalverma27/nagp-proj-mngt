@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Project Openings Management</title>
+    <link rel="stylesheet" href="/styles/bootstrap.min.css" >
+    <script src="/styles/js/jquery-3.3.1.slim.min.js"></script>
+    <script src="/styles/js/popper.min.js"></script>
+    <script src="/styles/js/bootstrap.min.js"></script>
+</head>
+<body>
+
+    <nav class="navbar navbar-expand-lg navbar-light bg-light">
+            <li class="navbar-brand">
+        <a href="/">Home</a>
+            </li>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <%if (user) { %>
+        <li class="navbar-brand">
+            <a  href="/openingsList">Openings</a>
+        </li>
+        <%if (user.role == 'Manager') { %>
+        <li class="navbar-brand">
+            <a  href="/addOpening">Add</a>
+        </li>
+        <% } }%>
+        <div class="collapse navbar-collapse" id="navbarNav">
+            <ul class="navbar-nav ml-auto">
+                <%if (user) { %>
+              
+                    <li class="nav-item">
+                        <a class="nav-link" href="/profile">Profile</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="/logout">Logout</a>
+                    </li>
+                <% } else { %>
+                    <li class="nav-item">
+                            <a class="nav-link" href="/signin">Signin</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="/signup">SignUp</a>
+                    </li>
+                <% } %>
+            </ul>
+        </div>
+    </nav>
+
+    <div class="container">
+        <% if (signupMessage.length > 0) { %>
+            <div class="alert alert-danger">
+                <%= signupMessage %>
+            </div>
+                
+        <% } %>
+        
+        <% if (signinMessage.length > 0) { %>
+            <div class="alert alert-danger">
+                <%= signinMessage %>
+            </div>
+                
+        <% } %>
+            
+        <%- body %>
+    </div>
+
+    
+
+</body>
+</html>

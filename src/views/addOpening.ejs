@@ -1,0 +1,74 @@
+<%- layout('layouts/main.ejs') %>
+<h1 class="mt-4">Openings</h1>
+
+<div class="card card-body">
+        <div class="container">
+                <div class="row">
+                  <div class="jumbotron" style="height: 368px">
+                  <img  src="/styles/img/add.png" title="Add Opeining" >
+                
+                  <h2 style="margin-top: 30px;">Add Opening</h2>
+                  </div>
+                  <div style="width: 30%; margin-left: 175px;">
+                    <form action="/add" method="POST" onsubmit="return validate();">
+                      <div class="form-group">
+                          <input class="form-control" type="text" placeholder="Project Name" name="project" id="project">
+                         <label  class="alert" id="project-error" style="display:none"> Please enter a valid project name </label>
+                      </div>
+                      <div class="form-group">
+                          <input class="form-control" type="text" placeholder="Client Name" name="client" id="client">
+                         <label  class="alert" id="client-error" style="display:none"> Please enter a valid client name </label>
+                      </div>
+                      <div class="form-group">
+                        <input class="form-control" type="text" placeholder="Technologies" name="technologies" id="technologies">
+                      </div>
+                      <div class="form-group">
+                          <input class="form-control" type="text" placeholder="Role" name="title" id="title">
+                         <label  class="alert" id="title-error" style="display:none"> Please enter a valid role </label>
+                      </div>
+                      <div class="form-group">
+                        <input class="form-control" type="text" placeholder="Description" name="desc">
+                      </div>
+                      <div class="form-group">
+                        <button class="btn btn-large btn-primary btn-block">Submit</button>
+                      </div>
+                    </form>
+              
+                   
+                  </div>
+                </div>
+              
+              </div>
+</div>
+
+<script>
+    function validate(){
+      var projectvalidated = false;
+      var clientvalidated = false;
+      var titlevalidated = false;
+      if(document.getElementById('project').value == "") {
+        document.getElementById('project-error').style.display = 'contents';
+        projectvalidated = false;
+      } else {
+        document.getElementById('project-error').style.display = 'none';
+        projectvalidated =  true;
+      }
+      if(document.getElementById('client').value == "") {
+        document.getElementById('client-error').style.display = 'contents';
+        clientvalidated = false;
+      } else {
+        document.getElementById('client-error').style.display = 'none';
+        clientvalidated =  true;
+      }
+      if(document.getElementById('title').value == "") {
+        document.getElementById('title-error').style.display = 'contents';
+        titlevalidated = false;
+      } else {
+        document.getElementById('title-error').style.display = 'none';
+        titlevalidated =  true;
+      }
+     
+      return projectvalidated && clientvalidated && titlevalidated;
+    }
+    
+    </script>

@@ -1,0 +1,9 @@
+{
+    "compilerOptions": {
+        "target": "es5",
+        "sourceMap": false,
+        "outDir": "${workspaceRoot}/dist/**/*.js",
+        "sourceRoot": "${workspaceRoot}/src"
+        
+    }
+}

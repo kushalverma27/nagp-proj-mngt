@@ -1,0 +1,28 @@
+<%- layout('layouts/main.ejs') %>
+
+<h1 class="mt-4">Profile</h1>
+
+<form action="/upload" method="POST" enctype="multipart/form-data">
+<div class="card card-body" name="credentials" id="credentials">
+   
+            <img src="/styles/img/avatar.jpg" style="width:200px">
+          
+            <div class="file-field input-field">
+                    <button type="submit" class="grey btn" style="background-color: #f7f7f9; width: 100px; padding: 2px;border: ridge;">Upload</button>
+                <div class="btn grey">
+                  <input id="myImage" name="myImage" type="file">
+                </div>
+                
+   
+   <br> <h3><%= user.email %></h3>
+ 
+
+</div>
+
+<h3 class="mt-4">Notifications</h3>
+<div class="card card-body">
+        <p><%= user.notification1 %></p>
+        <p><%= user.notification2 %></p>
+        <p><%= user.notification3 %></p>
+    
+    </div>

@@ -1,0 +1,89 @@
+<%- layout('layouts/main.ejs') %>
+<div class="card card-body">
+        <div class="container">
+                <div class="row">
+                    <div class="jumbotron">
+                        <img  src="/styles/img/edit.png" title="Uodate Opening" style="margin-left: 30px;">
+                      
+                        <h2 style="margin-top: 30px;">Update Opening</h2>
+                        </div>
+              
+                  <div style="width: 30%; margin: 25px auto;">
+                    <form action="/update" method="POST" onsubmit="return validate();">
+                      <div class="form-group">
+                         
+                        <input class="form-control" type="text" placeholder="Project Name" name="project" value="<%= opening.project %>" id="project">
+                        <label  class="alert" id="project-error" style="display:none"> Please enter a valid project name </label>
+                      </div>
+                      <div class="form-group">
+                          
+                         <input class="form-control" type="text" placeholder="Client Name" name="client" value="<%= opening.client %>" id="client">
+                         <label  class="alert" id="client-error" style="display:none"> Please enter a valid client name </label>
+                       </div>
+                       <div class="form-group">
+                          
+                         <input class="form-control" type="text" placeholder="Technologies" name="technologies" value="<%= opening.technologies %>">
+ 
+                       </div>
+                      <div class="form-group">
+                          <input class="form-control" type="text" placeholder="id" name="id" value="<%= opening._id %>" style="display:none">
+                        <input class="form-control" type="text" placeholder="Role" name="title" value="<%= opening.title %>" id="title">
+                        <label  class="alert" id="title-error" style="display:none"> Please enter a valid role </label>
+
+                      </div>
+                      <div class="form-group">
+                        <input class="form-control" type="text" placeholder="desc" name="desc" value="<%= opening.desc %>">
+                      </div>
+                      <div class="btn-group" data-toggle="buttons">
+                            <label class="btn btn-primary active"  style="width:157px; margin-right:5px;background-color: darkgreen;"><input type="radio" name="radioGroup2" value="true" style="margin-right:20px" checked>Open</label>
+                            <label class="btn btn-danger"  style="width:157px"><input type="radio" name="radioGroup2" value="false" style="margin-right:20px">Closed</label>
+                        </div>
+                      <div class="form-group">
+                        <button class="btn btn-large btn-primary" style="width:49%">Update</button>
+                    
+                        <a  href="/openingsList" </a> 
+                          <label class="btn btn-primary active"  style="width:158px; margin:0px;background-color: black;">Back</label>
+                        
+                        </a>
+                   
+                      </div>
+                    </form>
+              
+                   
+                  </div>
+                </div>
+              
+              </div>
+</div>
+
+<script>
+    function validate(){
+      var projectvalidated = false;
+      var clientvalidated = false;
+      var titlevalidated = false;
+      if(document.getElementById('project').value == "") {
+        document.getElementById('project-error').style.display = 'contents';
+        projectvalidated = false;
+      } else {
+        document.getElementById('project-error').style.display = 'none';
+        projectvalidated =  true;
+      }
+      if(document.getElementById('client').value == "") {
+        document.getElementById('client-error').style.display = 'contents';
+        clientvalidated = false;
+      } else {
+        document.getElementById('client-error').style.display = 'none';
+        clientvalidated =  true;
+      }
+      if(document.getElementById('title').value == "") {
+        document.getElementById('title-error').style.display = 'contents';
+        titlevalidated = false;
+      } else {
+        document.getElementById('title-error').style.display = 'none';
+        titlevalidated =  true;
+      }
+     
+      return projectvalidated && clientvalidated && titlevalidated;
+    }
+    
+    </script>

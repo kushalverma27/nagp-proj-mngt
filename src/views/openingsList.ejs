@@ -1,0 +1,120 @@
+<%- layout('layouts/main.ejs') %>
+
+
+<%  var count = 0;
+for(var k=0; k < openings.length; k++) { 
+   
+    if(openings[k].addedby == user._id) {
+        count++;
+    } 
+}
+    %>
+<% if(count>0)  {  %>
+<div class="card card-body">
+        
+        <h3 class="mt-4">Added by <%= user.email %></h3>
+        <table>
+            <% for(var i=0; i < openings.length; i++) { 
+                var opening = openings[i];
+                if(opening.addedby != user._id) {
+                    continue;
+                } 
+                %>
+               <tr>
+                
+                    <input class="form-control" type="text" placeholder="id" name="id" value="<%= openings[i]._id %>" style="display:none">
+                <td style="width:25%"> <h6>
+                    <%= opening.project %> </h6></td>
+                 <td style="width:25%"> <%= opening.client %></td>
+                 <td style="width:25%"> <%= opening.title %></td>
+                
+                    <td>
+                            <div class="form-group">
+                                    <a  href="/openingsList/<%= openings[i]._id %>">
+                                    <button class="btn btn-large btn-primary btn-block" style="background-color:darkslateblue">Edit
+                                          
+
+                                    </button>
+                                </a>
+                            </div>
+                        </td>
+                    
+                               
+               
+               </tr>
+            <% } %>
+            </table>
+        </div>  
+        <% } %>
+
+
+
+
+
+
+
+
+<div class="card card-body">
+
+<h3 class="mt-4">Available Openings</h3>
+<table>
+    <% for(var i=0; i < openings.length; i++) { 
+        var opening = openings[i];
+        if(opening.addedby == user._id || opening.status == false) {
+            continue;
+        } 
+        %>
+       <tr>
+        <form action="/apply" method="POST">   
+            <input class="form-control" type="text" placeholder="id" name="id" value="<%= openings[i]._id %>" style="display:none">
+            <input class="form-control" type="text" placeholder="title" name="title" value="<%= openings[i].title %>" style="display:none">
+            <input class="form-control" type="text" placeholder="project" name="project" value="<%= openings[i].project %>" style="display:none">
+            <td  style="width:25%"> <h6>
+            <%= opening.project %> </h6></td>
+            <td  style="width:25%">
+                    <%= opening.title %> </td> 
+            
+         <td  style="width:25%" > <p style="text-decoration-line: underline;"><a  href="/openingDetails/<%= openings[i]._id %>">Details</a></p> </td>
+      
+         <%
+         if (opening.status == false) { %>
+            <td>
+                    <div class="form-group">
+                            <button class="btn btn-large btn-primary btn-block" disabled = "true" style="background-color:maroon">Closed</button>
+                    </div>
+                </td>
+                <%
+            } else {
+         var applicantsList = opening.applicants;
+         applicantsList = applicantsList + '';
+         var splitArray = applicantsList.split(',');
+         var applied = false;
+         for (var j = 0; j < splitArray.length; j++) {
+            if(splitArray[j] == user._id) 
+              { 
+                applied = true;
+                break;
+            }
+               else
+               {  applied = false;} 
+            } 
+            if (!applied){ 
+            %>
+                    <td>
+                        <div class="form-group">
+                                <button class="btn btn-large btn-primary btn-block">Apply</button>
+                        </div>
+                    </td>
+                    <% } else {%>
+                    <td>
+                        <div class="form-group">
+                                <button class="btn btn-large btn-primary btn-block" style="background-color:darkgreen" disabled="true">Applied</button>
+                        </div>
+                    </td>
+                    <%  } }%>
+                       
+        </form>
+       </tr>
+    <% } %>
+    </table>
+</div>  
