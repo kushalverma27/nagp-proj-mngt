@@ -13,23 +13,7 @@ expect = chai.expect;
 var server = require('../src/index'),
 Openings = require('../src/models/openings');
 
-describe('Cruds', function(){
-	//Openings.collection.drop();
-	// beforeEach(function(done){
-	// 	var newData = new Openings({
-  //           project:'Test Project',
-  //           client:'Test Client',
-	// 		title: 'Quality Assurance'
-	// 	});
-  //   newData.save(function(err) {
-  //     done();
-  //   });
-  // });
-	// afterEach(function(done){
-	// 	Openings.collection.drop();
-	// 	done();
-	// });
-
+describe('API testing', function(){
   it('should return status 200 on homepage GET', function(done){
     chai.request(server)
     .get('/')

@@ -165,17 +165,20 @@ router.post('/update',  middleware.isLoggedIn, function(req, res) {
 router.post('/apply',  middleware.isLoggedIn, function(req, res) {
  // console.log(req.user._id)
  // console.log(req.body.id)
- users.findById(req.user._id, function(err, user) {
+ users.findById(req.body.addedby, function(err, user) {
   if (err) {
     req.flash('error', 'Opening could not be created');
   } else {
+      console.log(user.email)
       var not3 =  user.notification2;
       var not2 =  user.notification1;
-      var not1 =  'Applied for position '+req.body.title+" in project "+req.body.project;
-    users.findByIdAndUpdate(req.user._id, {notification1:not1,notification2:not2,notification3:not3 }, function(err, opening) {
+      var not1 =  req.user.email +' applied for position '+req.body.title+" in project "+req.body.project;
+      console.log(not1)
+    users.findByIdAndUpdate(req.body.addedby, {notification1:not1,notification2:not2,notification3:not3 }, function(err, user) {
       if (err) {
         req.flash('error', 'Opening could not be created');
       } else {
+        console.log(user.email)
         req.flash('success', 'Notification added');
       }
     });
